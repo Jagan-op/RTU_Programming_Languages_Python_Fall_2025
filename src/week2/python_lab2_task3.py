@@ -1,31 +1,27 @@
+# file: lab_3_3_operator_frequency.py
+from __future__ import annotations
+from typing import Dict, Iterable
 
-"""
-Lab 3.3 – Operator Frequency Counter
+TARGET_OPERATORS = ('+', '-', '*', '/', '(', ')')
 
-Goals:
-- Practice using strings and dictionaries.
-- Count character frequencies in user-provided text.
 
-Instructions:
-1. Ask the user for an arithmetic expression, e.g. "3 + 5 * (2 - 1) + 7 / 2".
-2. Count how many times each operator occurs:
-   +  -  *  /  (  )
-3. Store counts in a dictionary.
-4. Print the result.
-"""
+def count_operators(text: str, operators: Iterable[str] = TARGET_OPERATORS) -> Dict[str, int]:
+    """Count only the specified operators; ignores everything else."""
+    counts: Dict[str, int] = {op: 0 for op in operators}
+    for ch in text:
+        if ch in counts:  # why: guarantees O(1) membership and ignores non-target chars
+            counts[ch] += 1
+    return counts
 
-# TODO: Get input from the user
-expression = input("Enter an arithmetic expression: ")
 
-# Define possible operator symbols
-operators = ['+', '-', '*', '/', '(', ')']
+def main() -> None:
+    expression = input("Enter an arithmetic expression: ")
+    operator_counts = count_operators(expression)
 
-# TODO: Initialize frequency dictionary
-operator_counts = {}
+    # Print as a compact dict; keeps operator order consistent with TARGET_OPERATORS
+    ordered = {op: operator_counts[op] for op in TARGET_OPERATORS}
+    print("Operator counts:", ordered)
 
-# TODO: Count operator occurrences
-for char in expression:
-    pass  # check if char in operators, update counts
 
-# TODO: Print results
-print("Operator counts:", operator_counts)
+if __name__ == "__main__":
+    main()

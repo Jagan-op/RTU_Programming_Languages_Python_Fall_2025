@@ -1,39 +1,33 @@
+# file: lab_3_4_functional_tools.py
+from __future__ import annotations
+from typing import List, Tuple
 
 """
 Lab 3.4 – Functional Tools Practice
 
-Goals:
-- Learn to apply functional tools (`map`, `filter`, `zip`).
-- Compare functional style to list comprehensions.
-
-Instructions:
-Given:
-    prices = [12.5, 9.9, 15.0, 22.3, 5.0]
-    quantities = [2, 5, 1, 3, 4]
-
-1. Use map() and a lambda to compute total cost for each item (price * quantity).
-2. Use filter() to keep only totals above 30.
-3. Use zip() to pair prices with quantities.
-4. Try doing the same using list comprehensions for comparison.
+Notes:
+- zip truncates to the shortest iterable; mismatched lengths are safely handled by truncation.
+- Keep thresholds adjustable via a constant for easy tweaking.
 """
 
-prices = [12.5, 9.9, 15.0, 22.3, 5.0]
-quantities = [2, 5, 1, 3, 4]
+prices: List[float] = [12.5, 9.9, 15.0, 22.3, 5.0]
+quantities: List[int] = [2, 5, 1, 3, 4]
+THRESHOLD: float = 30.0
 
-# TODO: Compute totals using map()
-totals = []
+# map(): multiply aligned price/quantity
+totals: List[float] = list(map(lambda p, q: p * q, prices, quantities))
 
-# TODO: Filter totals above 30
-high_totals = []
+# filter(): retain totals > THRESHOLD
+high_totals: List[float] = list(filter(lambda t: t > THRESHOLD, totals))
 
-# TODO: Pair prices and quantities with zip()
-pairs = []
+# zip(): pair items for inspection or later processing
+pairs: List[Tuple[float, int]] = list(zip(prices, quantities))
 
-# TODO: Repeat using list comprehensions
-totals_comp = []
-high_totals_comp = []
+# Comprehension equivalents (often clearer and faster in CPython)
+totals_comp: List[float] = [p * q for p, q in zip(prices, quantities)]
+high_totals_comp: List[float] = [t for t in totals_comp if t > THRESHOLD]
 
-# TODO: Print results
+# Outputs
 print("Totals:", totals)
 print("Totals > 30:", high_totals)
 print("Price-quantity pairs:", pairs)

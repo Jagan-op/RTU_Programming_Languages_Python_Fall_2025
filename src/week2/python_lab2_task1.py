@@ -1,31 +1,26 @@
-"""
-Lab 3.1 – Simple Datasets and Aggregates
+# file: lab_3_1_simple_datasets_minimal.py
 
-Goals:
-- Create and manipulate Python lists and dictionaries.
-- Compute aggregates such as sum, average, max, and min.
+# Data
+temperatures = [18.2, 20.1, 19.4, 17.8, 21.0, 22.3, 20.7]
+city_population = {
+    "Riga": 605_802,
+    "Vilnius": 592_389,
+    "Tallinn": 454_188,
+    "Kaunas": 312_120,
+    "Liepaja": 68_945,
+}
 
-Instructions:
-1. Create a list `temperatures` with daily temperatures for one week.
-2. Create a dictionary `city_population` with at least 5 cities and their populations.
-3. Compute:
-   - The average temperature.
-   - The maximum and minimum population.
-   - The total population of all cities.
-4. Print your results in a clear, formatted way.
-"""
+# Aggregates
+average_temperature = sum(temperatures) / len(temperatures) if temperatures else 0.0  # why: avoid ZeroDivisionError
+largest_city, largest_population = max(city_population.items(), key=lambda kv: kv[1])
+smallest_city, smallest_population = min(city_population.items(), key=lambda kv: kv[1])
+total_population = sum(city_population.values())
 
-# TODO: Create the datasets - up to you to fill in the data
-temperatures = []
-city_population = {}
+# Output
+print("== Weekly Temperature Stats ==")
+print(f"Average temperature: {average_temperature:.2f}")
 
-# TODO: Compute aggregates
-average_temperature = 0
-largest_city = ""
-largest_population = 0
-total_population = 0
-
-# TODO: Print results
-print("Average temperature:", average_temperature)
-print("Largest city:", largest_city, "-", largest_population)
-print("Total population:", total_population)
+print("\n== City Population Stats ==")
+print(f"Largest city:  {largest_city} - {largest_population:,}")
+print(f"Smallest city: {smallest_city} - {smallest_population:,}")
+print(f"Total population: {total_population:,}")
